@@ -1,12 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	word1 := "ab"
-	word2 := "pqrs"
+	word1 := "ABCABC"
+	word2 := "ABC"
 
-	fmt.Printf("===> Check %v \n", MergeAlternately(word1, word2))
+	fmt.Printf("===> Check %v \n", GcdOfStrings(word1, word2))
 }
 
 func MergeAlternately(word1 string, word2 string) string {
@@ -33,4 +35,21 @@ func MergeAlternately(word1 string, word2 string) string {
 		}
 	}
 	return string(merge)
+}
+
+func GcdOfStrings(word1 string, word2 string) string {
+
+	if len(word1) < len(word2) {
+		GcdOfStrings(word2, word1)
+	}
+	if word1+word2 != word2+word1 {
+		return ""
+	}
+	a, b := len(word1), len(word2)
+	for b != 0 {
+		a, b = b, a%b
+		fmt.Printf("==> a %v b %v \n", a, b)
+	}
+	return string(word1[:a])
+
 }
