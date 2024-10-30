@@ -5,13 +5,13 @@ import (
 )
 
 func main() {
-	word1 := "ABCABC"
-	word2 := "ABC"
+	candies := []int{4, 2, 1, 1, 2}
+	extraCandies := 1
 
-	fmt.Printf("===> Check %v \n", GcdOfStrings(word1, word2))
+	kidsWithCandies(candies, extraCandies)
 }
 
-func MergeAlternately(word1 string, word2 string) string {
+func mergeAlternately(word1 string, word2 string) string {
 
 	len1 := len(word1)
 	len2 := len(word2)
@@ -37,10 +37,10 @@ func MergeAlternately(word1 string, word2 string) string {
 	return string(merge)
 }
 
-func GcdOfStrings(word1 string, word2 string) string {
+func gcdOfStrings(word1 string, word2 string) string {
 
 	if len(word1) < len(word2) {
-		GcdOfStrings(word2, word1)
+		gcdOfStrings(word2, word1)
 	}
 	if word1+word2 != word2+word1 {
 		return ""
@@ -52,4 +52,25 @@ func GcdOfStrings(word1 string, word2 string) string {
 	}
 	return string(word1[:a])
 
+}
+
+func kidsWithCandies(candies []int, extraCandies int) []bool {
+
+	Kids_with_largest_candies := []bool{}
+	var greatest int
+	greatest = candies[0]
+	for i := range candies {
+		if greatest < candies[i] {
+			greatest = candies[i]
+		}
+	}
+
+	for j := range candies {
+		if candies[j]+extraCandies < greatest {
+			Kids_with_largest_candies = append(Kids_with_largest_candies, false)
+		} else {
+			Kids_with_largest_candies = append(Kids_with_largest_candies, true)
+		}
+	}
+	return Kids_with_largest_candies
 }
