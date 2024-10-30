@@ -5,10 +5,11 @@ import (
 )
 
 func main() {
-	candies := []int{4, 2, 1, 1, 2}
-	extraCandies := 1
 
-	kidsWithCandies(candies, extraCandies)
+	flowerbed := []int{1, 0, 0, 0, 0, 1}
+	n := 2
+
+	canPlaceFlowers(flowerbed, n)
 }
 
 func mergeAlternately(word1 string, word2 string) string {
@@ -73,4 +74,42 @@ func kidsWithCandies(candies []int, extraCandies int) []bool {
 		}
 	}
 	return Kids_with_largest_candies
+}
+
+func canPlaceFlowers(flowerbed []int, n int) bool {
+	var plantCount int
+	if len(flowerbed) == 1 {
+		if n > 0 {
+			if flowerbed[0] == 0 {
+				return true
+			} else {
+				return false
+			}
+		} else {
+			return true
+		}
+
+	}
+	if flowerbed[0] == 0 && flowerbed[1] == 0 {
+		flowerbed[0] = 1
+		plantCount += 1
+	}
+	if flowerbed[len(flowerbed)-1] == 0 && flowerbed[len(flowerbed)-2] == 0 {
+		flowerbed[len(flowerbed)-1] = 1
+		plantCount += 1
+	}
+	for i := 1; i < len(flowerbed)-1; i++ {
+
+		if flowerbed[i-1] == 0 && flowerbed[i] == 0 && flowerbed[i+1] == 0 {
+			flowerbed[i] = 1
+			plantCount += 1
+		}
+
+	}
+
+	if plantCount >= n {
+		return true
+	} else {
+		return false
+	}
 }
