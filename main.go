@@ -6,10 +6,11 @@ import (
 
 func main() {
 
-	flowerbed := []int{1, 0, 0, 0, 0, 1}
-	n := 2
-
-	canPlaceFlowers(flowerbed, n)
+	s := "leetcode"
+	sortedVowels := reverseVowels(s)
+	fmt.Printf("==> given %v\n", s)
+	fmt.Printf("==> sorted %v\n", sortedVowels)
+	fmt.Printf("==> correct %v\n", "leotcede")
 }
 
 func mergeAlternately(word1 string, word2 string) string {
@@ -49,7 +50,6 @@ func gcdOfStrings(word1 string, word2 string) string {
 	a, b := len(word1), len(word2)
 	for b != 0 {
 		a, b = b, a%b
-		fmt.Printf("==> a %v b %v \n", a, b)
 	}
 	return string(word1[:a])
 
@@ -112,4 +112,26 @@ func canPlaceFlowers(flowerbed []int, n int) bool {
 	} else {
 		return false
 	}
+}
+
+func reverseVowels(s string) string {
+
+	sorted := []byte{}
+
+	vowels := []byte{}
+	for i := range s {
+		if string(s[i]) == "A" || string(s[i]) == "E" || string(s[i]) == "I" || string(s[i]) == "O" || string(s[i]) == "U" || string(s[i]) == "a" || string(s[i]) == "e" || string(s[i]) == "i" || string(s[i]) == "o" || string(s[i]) == "u" {
+			vowels = append(vowels, s[i])
+		}
+		sorted = append(sorted, s[i])
+
+	}
+	for i := range sorted {
+		if string(s[i]) == "A" || string(s[i]) == "E" || string(s[i]) == "I" || string(s[i]) == "O" || string(s[i]) == "U" || string(sorted[i]) == "a" || string(sorted[i]) == "e" || string(sorted[i]) == "i" || string(sorted[i]) == "o" || string(sorted[i]) == "u" {
+			sorted[i] = vowels[len(vowels)-1]
+			vowels = vowels[:len(vowels)-1]
+		}
+	}
+
+	return string(sorted)
 }
