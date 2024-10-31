@@ -6,11 +6,12 @@ import (
 
 func main() {
 
-	s := "leetcode"
-	sortedVowels := reverseVowels(s)
-	fmt.Printf("==> given %v\n", s)
-	fmt.Printf("==> sorted %v\n", sortedVowels)
-	fmt.Printf("==> correct %v\n", "leotcede")
+	s := "  hello world  "
+	correct := "world hello"
+	sortedVowels := reverseWords(s)
+	fmt.Printf("==> given (%v)\n", s)
+	fmt.Printf("==> sorted (%v)\n", sortedVowels)
+	fmt.Printf("==> correct (%v)\n", correct)
 }
 
 func mergeAlternately(word1 string, word2 string) string {
@@ -134,4 +135,26 @@ func reverseVowels(s string) string {
 	}
 
 	return string(sorted)
+}
+
+func reverseWords(s string) string {
+	var reversed []byte
+	word := []byte{}
+	word = nil
+	for i := range s {
+		if string(s[i]) != " " {
+			word = append(word, s[i])
+		}
+		if string(s[i]) == " " && word != nil {
+			reversed = []byte(string(word) + " " + string(reversed))
+			word = nil
+		}
+		if i == len(s)-1 && word != nil {
+			reversed = []byte(string(word) + " " + string(reversed))
+			word = nil
+		}
+
+	}
+	return string(reversed[:len(reversed)-1])
+
 }
