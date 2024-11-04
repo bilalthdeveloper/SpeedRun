@@ -5,12 +5,11 @@ import (
 )
 
 func main() {
-
-	s := "  hello world  "
-	correct := "world hello"
-	sortedVowels := reverseWords(s)
-	fmt.Printf("==> given (%v)\n", s)
-	fmt.Printf("==> sorted (%v)\n", sortedVowels)
+	given := []int{1, 2, 3, 4}
+	correct := []int{24, 12, 8, 6}
+	mine := productExceptSelf(given)
+	fmt.Printf("==> given (%v)\n", given)
+	fmt.Printf("==> mine (%v)\n", mine)
 	fmt.Printf("==> correct (%v)\n", correct)
 }
 
@@ -156,5 +155,24 @@ func reverseWords(s string) string {
 
 	}
 	return string(reversed[:len(reversed)-1])
+
+}
+
+func productExceptSelf(nums []int) []int {
+	result := make([]int, len(nums))
+	left := make([]int, len(nums))
+	right := make([]int, len(nums))
+	left[0] = 1
+	right[len(nums)-1] = 1
+	for i := 1; i < len(nums); i++ {
+		left[i] = left[i-1] * nums[i-1]
+	}
+	for i := len(nums) - 2; i >= 0; i-- {
+		right[i] = right[i+1] * nums[i+1]
+	}
+	for i := 0; i < len(nums); i++ {
+		result[i] = right[i] * left[i]
+	}
+	return result
 
 }
